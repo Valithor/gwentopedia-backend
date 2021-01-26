@@ -94,6 +94,8 @@ public class AuthController {
 			Document doc = Jsoup.connect(url).get();
 			Element avatar= doc.select("body > div > div > div.l-player-details > div.l-player-details__left > div.l-player-details__avatar > img").first();;
 			user.setAvatar(avatar.absUrl("src"));
+			if(user.getAvatar().length()==0)
+			user.setAvatar("https://cdn-l-playgwent.cdprojektred.com/avatars/0-default.jpg");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
