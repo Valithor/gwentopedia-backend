@@ -91,7 +91,7 @@ public class AuthController {
         
         String url= "https://www.playgwent.com/en/profile/"+user.getGogName();
         try {
-			Document doc = Jsoup.connect(url).get();
+			Document doc = Jsoup.connect(url).userAgent("Mozilla").get();
 			Element avatar= doc.select("body > div > div > div.l-player-details > div.l-player-details__left > div.l-player-details__avatar > img").first();;
 			user.setAvatar(avatar.absUrl("src"));
 			if(user.getAvatar().length()==0)
