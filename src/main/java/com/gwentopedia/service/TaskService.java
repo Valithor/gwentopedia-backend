@@ -222,7 +222,8 @@ public class TaskService {
 
         User creator = userRepository.findById(task.getCreatedBy())
                 .orElseThrow(() -> new ResourceNotFoundException("User", "id", task.getCreatedBy()));
-        List<Long> taskIds = List.of(taskId);
+        List<Long> taskIds = new ArrayList<Long>();
+        taskIds.add(taskId);
         Map<Long, Long> taskUserMap = currentUser!=null?getTaskUserMap(currentUser.getId()==null?null:currentUser.getId(), taskIds):null;
 
         return ModelMapper.mapTaskToTaskResponse(task, creator, taskUserMap == null ? null : taskUserMap.getOrDefault(task.getId(), null));
