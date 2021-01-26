@@ -88,14 +88,12 @@ public class AuthController {
         // Creating user's account
         User user = new User(signUpRequest.getName(), signUpRequest.getUsername(),
                 signUpRequest.getEmail(), signUpRequest.getPassword());
-        
+		user.setAvatar("https://cdn-l-playgwent.cdprojektred.com/avatars/0-default.jpg");
         String url= "https://www.playgwent.com/en/profile/"+user.getGogName();
         try {
 			Document doc = Jsoup.connect(url).userAgent("Mozilla").get();
 			Element avatar= doc.select("body > div > div > div.l-player-details > div.l-player-details__left > div.l-player-details__avatar > img").first();;
 			user.setAvatar(avatar.absUrl("src"));
-			if(user.getAvatar().length()==0)
-			user.setAvatar("https://cdn-l-playgwent.cdprojektred.com/avatars/0-default.jpg");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
